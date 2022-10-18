@@ -9,5 +9,11 @@ class EntityTrip {
   final double rating;
   final String notes;
 
-  const EntityTrip(this.id, this.userId, this.name, this.rating, this.notes);
+  const EntityTrip({
+    required this.id,
+    required this.userId,
+    required this.name,
+    required this.rating,
+    required this.notes,
+  });
 }

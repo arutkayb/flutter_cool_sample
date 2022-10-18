@@ -4,5 +4,8 @@ class EntityUser {
 
   final String remoteId;
 
-  const EntityUser(this.id, this.remoteId);
+  const EntityUser({
+    required this.id,
+    required this.remoteId,
+  });
 }

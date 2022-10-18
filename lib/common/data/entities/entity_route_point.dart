@@ -11,6 +11,11 @@ class EntityRoutePoint {
   final GeoLocation geoLocation;
   final int routeStartDateMillis;
 
-  EntityRoutePoint(this.id, this.tripId, this.orderInTrip, this.geoLocation,
-      this.routeStartDateMillis);
+  EntityRoutePoint({
+    required this.id,
+    required this.tripId,
+    required this.orderInTrip,
+    required this.geoLocation,
+    required this.routeStartDateMillis,
+  });
 }
