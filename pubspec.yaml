@@ -32,7 +32,17 @@ dependencies:
   flutter:
     sdk: flutter
 
+  sqflite: ^2.1.0+1
+  # Service locator
+  get_it: ^7.2.0
+  # For state management
+  bloc: ^8.0.1
+  # Value based equality for classes
+  equatable: ^2.0.3
+  # Easier routing
+  auto_route: ^3.2.0
 
+  google_fonts: ^3.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -41,9 +51,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  sqflite: ^2.1.0+1
+  build_runner: ^2.3.2
 
-  google_fonts: ^3.0.1
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

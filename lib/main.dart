@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cool_sample/common/configs/app_theme.dart';
 import 'package:flutter_cool_sample/home/screens/home_screen.dart';
+import 'package:flutter_cool_sample/injection.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 
