@@ -36,7 +36,7 @@ dependencies:
   # Service locator
   get_it: ^7.2.0
   # For state management
-  bloc: ^8.0.1
+  flutter_bloc: ^8.0.1
   # Value based equality for classes
   equatable: ^2.0.3
   # Easier routing

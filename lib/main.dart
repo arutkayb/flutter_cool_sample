@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cool_sample/common/configs/app_theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cool_sample/home/blocs/trip_list_bloc.dart';
 import 'package:flutter_cool_sample/home/screens/home_screen.dart';
 import 'package:flutter_cool_sample/injection.dart';
 
@@ -18,7 +20,10 @@ class MyApp extends StatelessWidget {
       title: 'Map With Weather Forecast',
       theme: AppTheme.lightThemeData,
       // TODO: make the theme configurable between light and dark
-      home: const HomeScreen(),
+      home: BlocProvider(
+        create: (BuildContext context) => locator.get<TripListBloc>(),
+        child: const HomeScreen(),
+      ),
     );
   }
 }

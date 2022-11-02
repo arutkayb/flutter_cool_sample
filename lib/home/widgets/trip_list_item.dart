@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class RouteListItem extends StatelessWidget {
-  final String _routeTitle;
-  final String _routeDate;
+class TripListItem extends StatelessWidget {
+  final String _tripTitle;
+  final String _tripDate;
   final Function _onTap;
 
-  const RouteListItem(this._routeTitle, this._routeDate, this._onTap,
+  const TripListItem(this._tripTitle, this._tripDate, this._onTap,
       {super.key});
 
   @override
@@ -27,7 +27,7 @@ class RouteListItem extends StatelessWidget {
                     color: Colors.blue,
                     child: Center(
                       child: Text(
-                        _routeTitle,
+                        _tripTitle,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -41,7 +41,7 @@ class RouteListItem extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.contain,
                         child: Text(
-                          _routeDate,
+                          _tripDate,
                         ),
                       ),
                     ),
