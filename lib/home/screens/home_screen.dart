@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cool_sample/common/models/trip.dart';
-import 'package:flutter_cool_sample/home/blocs/trip_list_bloc.dart';
+import 'package:flutter_cool_sample/home/controllers/trip_list_cubit.dart';
 import 'package:flutter_cool_sample/home/widgets/trip_list_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<TripListBloc>().add(RetrieveTripsEvent());
+    context.read<TripListCubit>().fetchTrips();
   }
 
   @override
@@ -26,21 +26,24 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                child: BlocBuilder<TripListBloc, List<Trip>>(
+                child: BlocBuilder<TripListCubit, List<Trip>?>(
                   builder: (context, trips) {
-                    return Column(
-                      children: trips
-                          .map(
-                        // TODO:
-                            (e) => TripListItem(
-                              e.name,
-                              e.routePoints.first.routeStartDateMillis
-                                  .toString(),
-                              () => print(e.name),
-                            ),
+                    return trips != null
+                        ? Column(
+                            children: trips
+                                .map(
+                                  // TODO:
+                                  (e) => TripListItem(
+                                    e.name,
+                                    e.routePoints.first.routeStartDateMillis
+                                        .toString(),
+                                    () => print(e.name),
+                                    key: UniqueKey(),
+                                  ),
+                                )
+                                .toList(),
                           )
-                          .toList(),
-                    );
+                        : Container();
                   },
                 ),
               ),

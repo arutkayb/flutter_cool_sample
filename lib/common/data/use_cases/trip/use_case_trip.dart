@@ -8,8 +8,27 @@ class UseCaseTrip implements IUseCaseTrip {
   UseCaseTrip(this._dataManager);
 
   @override
+  Future<Trip> insertTrip(Trip trip) {
+    // TODO: implement insertTrip
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> removeTrip(Trip trip) {
+    // TODO: implement removeTrip
+    throw UnimplementedError();
+  }
+
+  @override
   Future<List<Trip>> retrieveTrips() {
     // TODO: implement retrieveTrips
-    return Future.delayed(Duration.zero, () => List.empty());
+    throw UnimplementedError();
   }
+
+  @override
+  Future<Trip> updateTrip(Trip trip) {
+    // TODO: implement updateTrip
+    throw UnimplementedError();
+  }
+
 }
