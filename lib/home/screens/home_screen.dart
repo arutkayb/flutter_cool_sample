@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cool_sample/common/models/trip.dart';
+import 'package:flutter_cool_sample/edit_trip/controllers/edit_trip_bloc.dart';
+import 'package:flutter_cool_sample/edit_trip/controllers/edit_trip_state.dart';
+import 'package:flutter_cool_sample/edit_trip/screens/edit_trip_screen.dart';
 import 'package:flutter_cool_sample/home/controllers/trip_list_cubit.dart';
 import 'package:flutter_cool_sample/home/widgets/trip_list_item.dart';
 
@@ -32,12 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? Column(
                             children: trips
                                 .map(
-                                  // TODO:
-                                  (e) => TripListItem(
-                                    e.name,
-                                    e.routePoints.first.routeStartDateMillis
+                                  (trip) => TripListItem(
+                                    trip.name,
+                                    trip.routePoints.first.routeStartDateMillis
                                         .toString(),
-                                    () => print(e.name),
+                                    () {
+                                      pushEditTripScreen(trip);
+                                    },
                                     key: UniqueKey(),
                                   ),
                                 )
@@ -57,6 +61,20 @@ class _HomeScreenState extends State<HomeScreen> {
         child: const Icon(
           Icons.add,
           color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  void pushEditTripScreen(Trip trip) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (BuildContext context) => EditTripBloc(
+            EditTripState(trip),
+          ),
+          child: const EditTripScreen(),
         ),
       ),
     );
