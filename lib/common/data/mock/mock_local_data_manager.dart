@@ -15,7 +15,12 @@ class MockLocalDataManager implements ILocalDataManager {
         5,
         (index2) => RoutePoint(
           index.toString(),
-          GeoLocation(index.toString()),
+          GeoLocation(
+            index.toString(),
+            index.toString(),
+            0.0,
+            0.0,
+          ),
           List.empty(),
           0,
         ),

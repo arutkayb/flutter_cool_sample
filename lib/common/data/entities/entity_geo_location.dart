@@ -5,10 +5,10 @@ class EntityGeoLocation {
   // secondary key
   final String routePointId;
 
-  // TODO: Other attributes TBD
+  final String locationName;
+  final double longitude;
+  final double latitude;
 
-  EntityGeoLocation({
-    required this.id,
-    required this.routePointId,
-  });
+  EntityGeoLocation(this.id, this.routePointId, this.locationName,
+      this.longitude, this.latitude);
 }

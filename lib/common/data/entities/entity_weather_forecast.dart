@@ -7,7 +7,7 @@ class EntityWeatherForecast {
 
   // TODO: Other attributes TBD
 
-  EntityWeatherForecast({
+  const EntityWeatherForecast({
     required this.id,
     required this.routePointId,
   });

@@ -8,7 +8,7 @@ class EntityRoutePoint {
   final int orderInTrip;
   final int routeStartDateMillis;
 
-  EntityRoutePoint({
+  const EntityRoutePoint({
     required this.id,
     required this.tripId,
     required this.orderInTrip,
