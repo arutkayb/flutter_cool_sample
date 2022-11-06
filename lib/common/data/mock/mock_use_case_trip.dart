@@ -11,28 +11,7 @@ class MockUseCaseTrip implements IUseCaseTrip {
 
   @override
   Future<List<Trip>> retrieveTrips() {
-    return Future.delayed(Duration.zero, () {
-      return List.generate(
-        20,
-            (index) =>
-            Trip(
-              index.toString(),
-              index.toString(),
-              index.toDouble(),
-              index.toString(),
-              List.generate(
-                5,
-                    (index2) =>
-                    RoutePoint(
-                      index.toString(),
-                      GeoLocation(index.toString()),
-                      List.empty(),
-                      0,
-                    ),
-              ),
-            ),
-      );
-    });
+    return _dataManager.retrieveTrips();
   }
 
   @override

@@ -8,7 +8,12 @@ class Trip extends Equatable {
   final String notes;
   final List<RoutePoint> routePoints;
 
-  const Trip(this.id, this.name, this.rating, this.notes, this.routePoints);
+  const Trip(this.id, this.name, this.rating, this.notes, this.routePoints)
+      : super();
+
+  factory Trip.copy(Trip trip) {
+    return Trip(trip.id, trip.name, trip.rating, trip.notes, trip.routePoints);
+  }
 
   @override
   List<Object> get props {

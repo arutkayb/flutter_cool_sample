@@ -13,12 +13,10 @@ class EditTripBloc extends Bloc<EditTripEvent, EditTripState> {
       (event, emit) async {
         try {
           Trip trip = await _useCaseTrip.updateTrip(event.trip);
-          state.updateTrip(trip);
+          emit(EditTripState(trip));
         } catch (e) {
-          state.error();
+          // TODO:
         }
-
-        emit(state);
       },
     );
 
@@ -26,31 +24,23 @@ class EditTripBloc extends Bloc<EditTripEvent, EditTripState> {
       (event, emit) async {
         try {
           Trip trip = await _useCaseTrip.insertTrip(event.trip);
-          state.updateTrip(trip);
+          emit(EditTripState(trip));
         } catch (e) {
-          state.error();
+          // TODO:
         }
-
-        emit(state);
       },
     );
+  }
 
-    on<RemoveTripEvent>(
-      (event, emit) async {
-        try {
-          bool status = await _useCaseTrip.removeTrip(event.trip);
-          if (status) {
-            state.updateTrip(null);
-          } else {
-            state.error();
-          }
-        } catch (e) {
-          state.error();
-        }
+  Future<bool> removeTrip() async {
+    bool status = false;
+    try {
+      status = await _useCaseTrip.removeTrip(state.trip);
+    } catch (e) {
+      // TODO:
+    }
 
-        emit(state);
-      },
-    );
+    return status;
   }
 
   bool isChanged(Trip trip) {

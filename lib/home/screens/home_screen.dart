@@ -5,6 +5,7 @@ import 'package:flutter_cool_sample/edit_trip/controllers/edit_trip_bloc.dart';
 import 'package:flutter_cool_sample/edit_trip/controllers/edit_trip_state.dart';
 import 'package:flutter_cool_sample/edit_trip/screens/edit_trip_screen.dart';
 import 'package:flutter_cool_sample/home/controllers/trip_list_cubit.dart';
+import 'package:flutter_cool_sample/home/controllers/trip_list_state.dart';
 import 'package:flutter_cool_sample/home/widgets/trip_list_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,29 +33,25 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                child: BlocBuilder<TripListCubit, List<Trip>?>(
-                  builder: (context, trips) {
-                    return trips != null
-                        ? Column(
-                            children: trips
-                                .map(
-                                  (trip) => TripListItem(
-                                    trip.name,
-                                    trip.routePoints.first.routeStartDateMillis
-                                        .toString(),
-                                    () async {
-                                      final res =
-                                          await pushEditTripScreen(trip);
-                                      if (res != null && res) {
-                                        _controller.fetchTrips();
-                                      }
-                                    },
-                                    key: UniqueKey(),
-                                  ),
-                                )
-                                .toList(),
+                child: BlocBuilder<TripListCubit, TripListState>(
+                  bloc: _controller,
+                  builder: (context, state) {
+                    return Column(
+                      children: state.trips
+                          .map(
+                            (trip) => TripListItem(
+                              trip.name,
+                              trip.routePoints.first.routeStartDateMillis
+                                  .toString(),
+                              () async {
+                                await pushEditTripScreen(trip);
+                                _controller.fetchTrips();
+                              },
+                              key: UniqueKey(),
+                            ),
                           )
-                        : Container();
+                          .toList(),
+                    );
                   },
                 ),
               ),
@@ -73,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     );
   }
 
-  Future<dynamic> pushEditTripScreen(Trip trip) {
+  Future pushEditTripScreen(Trip trip) async {
     return Navigator.push(
       context,
       MaterialPageRoute(

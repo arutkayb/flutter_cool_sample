@@ -12,19 +12,19 @@ class MockDataManager implements IDataManager {
   @override
   Future<Trip> insertTrip(Trip trip) {
     // TODO: implement insertTrip
-    throw UnimplementedError();
+    return _localDataManager.insertTrip(trip);
   }
 
   @override
   Future<bool> removeTrip(Trip trip) {
     // TODO: implement removeTrip
-    throw UnimplementedError();
+    return _localDataManager.removeTrip(trip);
   }
 
   @override
   Future<List<Trip>> retrieveTrips() {
     // TODO: implement retrieveTrips
-    throw UnimplementedError();
+    return _localDataManager.retrieveTrips();
   }
 
   @override

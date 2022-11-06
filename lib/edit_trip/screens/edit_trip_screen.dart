@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cool_sample/edit_trip/controllers/edit_trip_bloc.dart';
+import 'package:flutter_cool_sample/edit_trip/controllers/edit_trip_events.dart';
+import 'package:flutter_cool_sample/edit_trip/controllers/edit_trip_state.dart';
 import 'package:flutter_cool_sample/edit_trip/widgets/route_point_list_item.dart';
 
 class EditTripScreen extends StatefulWidget {
@@ -22,53 +24,73 @@ class _EditTripScreenState extends State<EditTripScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Row(
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                Flexible(
-                  flex: 4,
-                  child: Container(color: Colors.blue),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(color: Colors.green),
-                ),
-                Flexible(
-                  flex: 3,
-                  fit: FlexFit.tight,
-                  child: Container(
-                    color: Colors.yellow,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: _controller.state.trip?.routePoints
-                                .map(
-                                  (routePoint) => RoutePointListItem(
-                                    _controller.state.trip!.routePoints
-                                        .indexOf(routePoint),
-                                    routePoint,
-                                    () => print(routePoint.id),
-                                  ),
-                                )
-                                .toList() ??
-                            [
-                              Container(),
-                            ],
-                      ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 2,
-                  child: Container(color: Colors.red),
-                ),
-              ],
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () async {
+              bool res = await _controller.removeTrip();
+              if (res) {
+                Navigator.pop(this.context);
+              } else {
+                //TODO: show an error
+              }
+            },
+            icon: const Icon(
+              Icons.delete_forever,
             ),
           ),
         ],
       ),
+      body: BlocBuilder<EditTripBloc, EditTripState>(
+          bloc: _controller,
+          builder: (context, tripState) {
+            return Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Flexible(
+                        flex: 4,
+                        child: Container(color: Colors.blue),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Container(color: Colors.green),
+                      ),
+                      Flexible(
+                        flex: 3,
+                        fit: FlexFit.tight,
+                        child: Container(
+                          color: Colors.yellow,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: tripState.trip?.routePoints
+                                      .map(
+                                        (routePoint) => RoutePointListItem(
+                                          tripState.trip!.routePoints
+                                              .indexOf(routePoint),
+                                          routePoint,
+                                          () => print(routePoint.id),
+                                        ),
+                                      )
+                                      .toList() ??
+                                  [
+                                    Container(),
+                                  ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Container(color: Colors.red),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }),
     );
   }
 }

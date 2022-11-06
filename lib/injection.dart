@@ -12,6 +12,7 @@ import 'package:flutter_cool_sample/common/data/use_cases/trip/i_use_case_trip.d
 import 'package:flutter_cool_sample/common/data/use_cases/user/i_use_case_user.dart';
 import 'package:flutter_cool_sample/edit_trip/controllers/edit_trip_bloc.dart';
 import 'package:flutter_cool_sample/home/controllers/trip_list_cubit.dart';
+import 'package:flutter_cool_sample/home/controllers/trip_list_state.dart';
 import 'package:get_it/get_it.dart';
 
 final locator = GetIt.instance;
@@ -43,5 +44,5 @@ void configureDependencies() {
     ),
   );
 
-  locator.registerFactory(() => TripListCubit(List.empty()));
+  locator.registerFactory(() => TripListCubit(TripListState(List.empty())));
 }

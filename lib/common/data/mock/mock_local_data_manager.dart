@@ -2,7 +2,6 @@ import 'package:flutter_cool_sample/common/data/local/i_local_data_manager.dart'
 import 'package:flutter_cool_sample/common/models/geo_location.dart';
 import 'package:flutter_cool_sample/common/models/route_point.dart';
 import 'package:flutter_cool_sample/common/models/trip.dart';
-import 'package:sqflite/sqflite.dart';
 
 class MockLocalDataManager implements ILocalDataManager {
   final List<Trip> _trips = List.generate(
@@ -26,7 +25,7 @@ class MockLocalDataManager implements ILocalDataManager {
 
   @override
   Future<List<Trip>> retrieveTrips() {
-    return Future.delayed(Duration.zero, () => _trips);
+    return Future.delayed(Duration.zero, () => List.from(_trips));
   }
 
   @override
