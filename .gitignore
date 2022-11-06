@@ -146,3 +146,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+android/app/src/main/secrets.xml
+ios/Runner/Secrets.swift
