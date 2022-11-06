@@ -52,4 +52,8 @@ class EditTripBloc extends Bloc<EditTripEvent, EditTripState> {
       },
     );
   }
+
+  bool isChanged(Trip trip) {
+    return trip != state.trip;
+  }
 }

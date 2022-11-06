@@ -14,11 +14,14 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+  late TripListCubit _controller;
+
   @override
   void initState() {
     super.initState();
-    context.read<TripListCubit>().fetchTrips();
+    _controller = context.read<TripListCubit>();
+    _controller.fetchTrips();
   }
 
   @override
@@ -39,8 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     trip.name,
                                     trip.routePoints.first.routeStartDateMillis
                                         .toString(),
-                                    () {
-                                      pushEditTripScreen(trip);
+                                    () async {
+                                      final res =
+                                          await pushEditTripScreen(trip);
+                                      if (res != null && res) {
+                                        _controller.fetchTrips();
+                                      }
                                     },
                                     key: UniqueKey(),
                                   ),
@@ -66,8 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void pushEditTripScreen(Trip trip) {
-    Navigator.push(
+  Future<dynamic> pushEditTripScreen(Trip trip) {
+    return Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => BlocProvider(
